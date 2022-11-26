@@ -17,7 +17,7 @@ public class main_code {
             case "decimal": {
                 System.out.print("Enter the number in decimal -> ");
                 nof_decimal = sc2.nextInt();
-                conversion_decimal(number_from, number_to, nof_binary);
+                conversion_decimal(number_to, nof_decimal);
                 break;
             }
             case "binary": {
@@ -29,13 +29,13 @@ public class main_code {
             case "octal": {
                 System.out.print("Enter the number in octal -> ");
                 nof_octal = sc2.nextInt();
-                conversion_binary(number_from, number_to, nof_octal);
+                conversion_binary(number_to, nof_octal);
                 break;
             }
             case "hexadecimal": {
                 System.out.print("Enter the number in hexadecimal -> ");
                 nof_hexadecimal = sc2.nextLine();
-                conversion_binary(number_from, number_to, nof_binary);
+                conversion_binary(number_to, nof_binary);
                 break;
             }
             default:
@@ -53,14 +53,14 @@ public class main_code {
             num = num / 10;
         }
         if (c == r)
-            conversion_binary(number_from, number_to, nof_binary);
+            conversion_binary(number_to, nof_binary);
         else
             System.exit(0);
     }
 
     //I am going to make a program that performs conversion between different number system
     //BINARY CODING STARTS HERE
-    static void conversion_binary(String n_binary, String n_to, int no_from) {
+    static void conversion_binary(String n_to, int no_from) {
         switch (n_to) {
             case "decimal": {
                 BinarytoDecimal(no_from);
@@ -139,17 +139,73 @@ public class main_code {
         }
         System.out.print(" is ("+hex+")16");
     }
-    static void conversion_decimal(String n_binary, String n_to, int no_from) {
-        switch (n_to) {
-            case "decimal": {
-
+    //binary to hexa_decimal done
+    //BINARY DONE
+    //DECIMAL STARTED
+    static void conversion_decimal(String n_to, int no_from)
+    {
+        switch (n_to)
+        {
+            case "binary":
+            {
+                DecimaltoBinary(no_from);
+                break;
             }
-            case "octal": {
-
+            case "octal":
+            {
+                DecimaltoOctal(no_from);
+                break;
             }
-            case "hexadecimal": {
-
+            case "hexadecimal":
+            {
+                DecimaltoHexadecimal(no_from);
             }
         }
+    }
+    //decimal to binary started
+    public static void DecimaltoBinary(int decimal){
+        int bin[] = new int[40];
+        int index = 0;
+        System.out.print("Binary conversion of ("+decimal+")10"+" is (");
+        while(decimal > 0)
+        {
+            bin[index++] = decimal%2;
+            decimal = decimal/2;
+        }
+        for(int i = index-1;i >= 0;i--){
+            System.out.print(bin[i]);
+        }
+        System.out.print(")2");
+    }
+    //decimal to binary done
+    //decimal to octal started
+    public static void DecimaltoOctal(int decimal)
+    {
+        int remainder;
+        String octal="";
+        System.out.print("Octal conversion of ("+decimal+")10");
+        char octalnos[]={'0','1','2','3','4','5','6','7'};
+        while(decimal>0)
+        {
+            remainder=decimal%8;
+            octal=octalnos[remainder]+octal;
+            decimal=decimal/8;
+        }
+        System.out.println(" is ("+octal+")8");
+    }
+    //decimal to octal done
+    //decimal to hexa_decimal started
+    public static void DecimaltoHexadecimal(int decimal){
+        int remainder;
+        String hex="";
+        System.out.print("Hexa-Decimal conversion of ("+decimal+")10");
+        char hexnos[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        while(decimal>0)
+        {
+            remainder=decimal%16;
+            hex=hexnos[remainder]+hex;
+            decimal=decimal/16;
+        }
+        System.out.println(" is ("+hex+")8");
     }
 }

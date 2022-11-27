@@ -29,7 +29,7 @@ public class main_code {
             case "octal": {
                 System.out.print("Enter the number in octal -> ");
                 nof_octal = sc2.nextInt();
-                conversion_binary(number_to, nof_octal);
+                conversion_octal(number_to, nof_octal);
                 break;
             }
             case "hexadecimal": {
@@ -206,6 +206,88 @@ public class main_code {
             hex=hexnos[remainder]+hex;
             decimal=decimal/16;
         }
-        System.out.println(" is ("+hex+")8");
+        System.out.println(" is ("+hex+")16");
     }
+    //decimal to hexa_decimal done
+    //DECIMAL DONE
+    //OCTAL STARTED
+    static void conversion_octal(String n_to, int no_from)
+    {
+        switch (n_to)
+        {
+            case "binary":
+            {
+                OctaltoBinary(no_from);
+                break;
+            }
+            case "decimal":
+            {
+                OctaltoDecimal(no_from);
+                break;
+            }
+            case "hexadecimal":
+            {
+                OctaltoHexadecimal(no_from);
+                break;
+            }
+        }
+    }
+    //octal to binary started
+    public static void OctaltoBinary(int octal)
+    {
+        int i = 0;
+        int decimal = 0;
+        int binary = 0;
+        System.out.print("Binary conversion of ("+octal+")8");
+        while (octal != 0) {
+            decimal += (octal % 10) * Math.pow(8, i);
+            ++i;
+            octal /= 10;
+        }
+        i = 1;
+        while (decimal != 0) {
+            binary += (decimal % 2) * i;
+            decimal /= 2;
+            i *= 10;
+        }
+        System.out.println(" is ("+binary+")2");
+    }
+    //octal to binary done
+    //octal to decimal started
+    public static void OctaltoDecimal(int octal)
+    {
+        int i = 0;
+        int decimal = 0;
+        System.out.print("Decimal conversion of (" + octal + ")8");
+        while (octal != 0) {
+            decimal += (octal % 10) * Math.pow(8, i);
+            ++i;
+            octal /= 10;
+        }
+        System.out.println(" is ("+decimal+")10");
+    }
+    //octal to decimal done
+    //octal to hexa-decimal started
+    public static void OctaltoHexadecimal(int octal){
+        int k = 0;
+        int decimal = 0;
+        System.out.print("Hexa-Decimal conversion of ("+octal+")10");
+        while (octal != 0) {
+            decimal += (octal % 10) * Math.pow(8, k);
+            ++k;
+            octal /= 10;
+        }
+        int remainder;
+        String hex="";
+        char hexnos[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+        while(decimal>0)
+        {
+            remainder=decimal%16;
+            hex=hexnos[remainder]+hex;
+            decimal=decimal/16;
+        }
+        System.out.println(" is ("+hex+")16");
+    }
+    //octal to hexa_decimal done
+    //OCTAL DONE
 }

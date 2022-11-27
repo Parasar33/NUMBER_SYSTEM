@@ -3,15 +3,35 @@ import java.util.Scanner;
 public class main_code {
     static String number_from;
     static String number_to;
-    static int nof_decimal, nof_binary, nof_octal;
+    static int nof_decimal, nof_binary, nof_octal , number_to_int , number_to_from;
     static String nof_hexadecimal;
 
     public static void main(String[] args) {
-        System.out.print("Enter the number to convert from -> ");
         Scanner sc1 = new Scanner(System.in);
-        number_from = sc1.nextLine();
+        System.out.println("************************************");
+        System.out.println(" WELCOME TO NUMBER SYSTEM CONVERTOR");
+        System.out.println("We convert between\n1.Binary\n2.Decimal\n3.Octal\n4.Hexa-Decimal");
+        System.out.println("************************************");
+        System.out.print("Enter the number to convert from -> ");
+        number_to_from = sc1.nextInt();
+        switch (number_to_from)
+        {
+            case 1:number_from ="binary";break;
+            case 2:number_from ="decimal";break;
+            case 3:number_from ="octal";break;
+            case 4:number_from ="hexadecimal";break;
+            default: System.out.println("Enter correct number choice ");System.exit(0);
+        }
         System.out.print("Enter the number to convert to -> ");
-        number_to = sc1.nextLine();
+        number_to_int = sc1.nextInt();
+        switch (number_to_int)
+        {
+            case 1:number_to ="binary";break;
+            case 2:number_to ="decimal";break;
+            case 3:number_to ="octal";break;
+            case 4:number_to ="hexadecimal";break;
+            default: System.out.println("Enter correct number choice ");System.exit(0);
+        }
         Scanner sc2 = new Scanner(System.in);
         switch (number_from) {
             case "decimal": {
@@ -35,12 +55,11 @@ public class main_code {
             case "hexadecimal": {
                 System.out.print("Enter the number in hexadecimal -> ");
                 nof_hexadecimal = sc2.nextLine();
-                conversion_binary(number_to, nof_binary);
+                conversion_hexadecimal(number_to, nof_hexadecimal);
                 break;
             }
-            default:
-                System.out.println("Enter correct type of Number ");
         }
+        System.out.println("\n************************************\n________thanks From Rishav :)");
     }
 
     static void CheckNumberisBinary(int num) {
@@ -290,4 +309,102 @@ public class main_code {
     }
     //octal to hexa_decimal done
     //OCTAL DONE
+    //HEXA-DECIMAL STARTED
+    static void conversion_hexadecimal(String n_to, String no_from)
+    {
+        switch (n_to)
+        {
+            case "binary":
+            {
+                HexadecimaltoBinary(no_from);
+                break;
+            }
+            case "decimal":
+            {
+                HexadecimaltoDecimal(no_from);
+                break;
+            }
+            case "octal":
+            {
+                HexadecimaltoOctal(no_from);
+                break;
+            }
+        }
+    }
+    //hexa-decimal to binary started
+    public static void HexadecimaltoBinary(String hexadecimal)
+    {
+        int i=0, len;
+        len = hexadecimal.length();
+        System.out.print("Binary conversion of ("+hexadecimal+")16 is (");
+        char[] hexDigit = hexadecimal.toCharArray();
+        while(i<len)
+        {
+            switch(hexDigit[i])
+            {
+                case '0': System.out.print("0000");break;
+                case '1': System.out.print("0001");break;
+                case '2': System.out.print("0010");break;
+                case '3': System.out.print("0011");break;
+                case '4': System.out.print("0100");break;
+                case '5': System.out.print("0101");break;
+                case '6': System.out.print("0110");break;
+                case '7': System.out.print("0111");break;
+                case '8': System.out.print("1000");break;
+                case '9': System.out.print("1001");break;
+                case 'a': case 'A': System.out.print("1010");break;
+                case 'b': case 'B': System.out.print("1011");break;
+                case 'c': case 'C': System.out.print("1100");break;
+                case 'd': case 'D': System.out.print("1101");break;
+                case 'e': case 'E': System.out.print("1110");break;
+                case 'f': case 'F': System.out.print("1111");break;
+                default: System.out.println("Invalid Hexadecimal Digit!");
+                    return;
+            }
+            i++;
+        }
+        System.out.print(")2");
+    }
+    //hexa-decimal to binary done
+    //hexa-decimal to decimal started
+    public static void HexadecimaltoDecimal(String hexadecimal){
+        String digits = "0123456789ABCDEF";
+        System.out.print("Decimal conversion of ("+hexadecimal+")16");
+        hexadecimal = hexadecimal.toUpperCase();
+        int decimal = 0;
+        for (int i = 0; i < hexadecimal.length(); i++)
+        {
+            char c = hexadecimal.charAt(i);
+            int d = digits.indexOf(c);
+            decimal = 16*decimal + d;
+        }
+        System.out.println(" is ("+decimal+")10");
+    }
+    //hexa-decimal to decimal done
+    //hexa-decimal to octal started
+    public static void HexadecimaltoOctal(String hexadecimal)
+    {
+        String digits = "0123456789ABCDEF";
+        System.out.print("Octal conversion of ("+hexadecimal+")16");
+        hexadecimal = hexadecimal.toUpperCase();
+        int decimal = 0;
+        for (int i = 0; i < hexadecimal.length(); i++)
+        {
+            char c = hexadecimal.charAt(i);
+            int d = digits.indexOf(c);
+            decimal = 16*decimal + d;
+        }
+        int remainder;
+        String octal="";
+        char octalnos[]={'0','1','2','3','4','5','6','7'};
+        while(decimal>0)
+        {
+            remainder=decimal%8;
+            octal=octalnos[remainder]+octal;
+            decimal=decimal/8;
+        }
+        System.out.println(" is ("+octal+")8");
+    }
+    //hexa-decimal to octal done
+    //HEXA-DECIMAL DONE
 }
